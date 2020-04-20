@@ -26,7 +26,7 @@ $ yarn global add tinyvideo
 ## Usage
 
 ```shell
-http-server --dark --root public
+tinyvideo folder/*.mp4
 ```
 
 ## Usage (Programmatic)
