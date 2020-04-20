@@ -1,8 +1,15 @@
 import test from 'ava';
-import { VideoCompressor, defaultCompressionOptions, CompressResult } from '../src/compressor';
+import {
+  VideoCompressor,
+  defaultCompressionOptions,
+  CompressResult,
+} from '../src/compressor';
 
 test('getOutputFilename works', (t) => {
-  const first = VideoCompressor.getOutputFilename('pizza.pizza.mp4', defaultCompressionOptions.suffix);
+  const first = VideoCompressor.getOutputFilename(
+    'pizza.pizza.mp4',
+    defaultCompressionOptions.suffix
+  );
   const second = VideoCompressor.getOutputFilename('pizza.mp4', '');
   t.is(first, 'pizza.pizza_compressed.mp4');
   t.is(second, 'pizza.mp4');

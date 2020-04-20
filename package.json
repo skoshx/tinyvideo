@@ -1,6 +1,6 @@
 {
   "name": "tinyvideo",
-  "version": "3.0.0",
+  "version": "1.0.1",
   "description": "A package that compresses video files using FFMPEG compressor.",
   "unpkg": "dist/tinyvideo.js",
   "bin": {

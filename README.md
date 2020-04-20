@@ -5,7 +5,7 @@
 ## Features
 
 - Really simple compressing using glob patterns.
-- 
+-
 
 ## Install
 
@@ -21,7 +21,7 @@ $ yarn global add tinyvideo
 
 ###### Download
 
-- [Normal](https://raw.githubusercontent.com/SkoshRG/http-server/master/index.ts)
+- [Normal](https://unpkg.com/tinyvideo@1.0.0/dist/tinyvideo.js)
 
 ## Usage
 
