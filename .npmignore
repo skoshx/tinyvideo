@@ -1,0 +1,5 @@
+.cache/
+.DS_Store
+node_modules/
+test/test video_compressed.mov
+dist/tinyvideo.js.map
