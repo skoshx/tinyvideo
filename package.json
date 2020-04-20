@@ -7,8 +7,7 @@
     "tinyvideo": "dist/tinyvideo.js"
   },
   "scripts": {
-    "build": "yarn check-types && parcel build src/cli.ts --target node --out-file tinyvideo.js",
-    "build-binaries": "pkg .",
+    "build": "yarn check-types && yarn format && parcel build src/cli.ts --target node --out-file tinyvideo.js",
     "dev": "parcel watch src/cli.ts",
     "format": "prettier --write .",
     "check-types": "tsc --noEmit",
