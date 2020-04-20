@@ -8,6 +8,7 @@
 const globby = require('globby');
 const execa = require('execa');
 const chalk = require('chalk');
+const { resolve } = require('path');
 
 interface CompressionOptions {
   compressionRate: number; // How much to compress. The higher the more it gets compressed.
@@ -58,18 +59,15 @@ export class VideoCompressor {
     this.files = await globby(patterns);
     if (this.files.length === 0) return CompressResult.invalid_glob;
     for (let i = 0; i < this.files.length; i++) {
-      let filePath = this.files[i];
-
-      // Fix spaces in files
-      if (process.platform === 'win32') filePath = `\'${filePath}\'`;
-      else filePath = filePath.replace(/ /g, '\\ ');
+      const filePath = this.fixSpaces(this.files[i]);
+      const binaryPath = this.fixSpaces(this.getBinaryFile(process.platform));
 
       const outputFileName = this.getOutputFilename(
         filePath,
         this.options.suffix
       );
-      const command = `ffmpeg -i ${filePath} -vcodec libx264 -strict -2 -crf ${this.options.compressionRate} ${outputFileName}`;
-      console.log(command);
+      // const command = `ffmpeg -i ${filePath} -vcodec libx264 -strict -2 -crf ${this.options.compressionRate} ${outputFileName}`;
+      const command = `${binaryPath} -i ${filePath} -vcodec libx264 -strict -2 -crf ${this.options.compressionRate} ${outputFileName}`;
       console.log(
         `Compressing file ${i + 1}/${
           this.files.length
@@ -83,6 +81,22 @@ export class VideoCompressor {
       }
     }
     return CompressResult.success;
+  }
+
+  public static getBinaryFile(platform: string): string {
+    if (platform === 'win32')
+      return resolve(__dirname, '..', 'ffmpeg_binaries/ffmpeg.exe');
+    else return resolve(__dirname, '..', 'ffmpeg_binaries/ffmpeg');
+  }
+
+  /**
+   * Escapes spaces in file names and paths.
+   * @param fileName The filename / pathname
+   */
+  public static fixSpaces(fileName: string): string {
+    return fileName.replace(/(\s+)/g, '\\$1');
+    // if (process.platform === 'win32') return `\'${fileName}\'`;
+    // else return fileName.replace(/ /g, '\\ ');
   }
 
   public static getOutputFilename(input: string, suffix: string): string {
