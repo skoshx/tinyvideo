@@ -11,19 +11,11 @@
     "dev": "parcel watch src/cli.ts",
     "format": "prettier --write .",
     "check-types": "tsc --noEmit",
-    "test": "ava"
-  },
-  "ava": {
-    "typescript": {
-      "rewritePaths": {
-        "src/": "dist/"
-      }
-    }
+    "test": "tsc src/compressor.ts && ava ; rm -f src/compressor.js ; rm -f test/test_video_compressed.mov"
   },
   "author": "skoshx",
   "license": "UNLICENSED",
   "dependencies": {
-    "@ava/typescript": "^1.1.1",
     "@types/node": "^13.13.0",
     "ava": "^3.7.1",
     "chalk": "^4.0.0",

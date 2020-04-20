@@ -1,9 +1,16 @@
-import test from 'ava';
+/*import test from 'ava';
 import {
   VideoCompressor,
   defaultCompressionOptions,
   CompressResult,
-} from '../src/compressor';
+} from '../src/compressor';*/
+
+const test = require('ava');
+const {
+  VideoCompressor,
+  defaultCompressionOptions,
+  CompressResult,
+} = require('../src/compressor');
 
 test('getOutputFilename works', (t) => {
   const first = VideoCompressor.getOutputFilename(
@@ -17,14 +24,14 @@ test('getOutputFilename works', (t) => {
 
 test('reports correct errors', async (t) => {
   const first = await VideoCompressor.compress(['invalid glob']); // invalid glob
-  const second = await VideoCompressor.compress(['']); // no glob
-  const third = await VideoCompressor.compress(['test/*.js']); // glob to incompatible file
+  const second = await VideoCompressor.compress([]); // no glob
+  const third = await VideoCompressor.compress(['test/index.ts']); // glob to incompatible file
   t.is(first, CompressResult.invalid_glob);
   t.is(second, CompressResult.no_glob_provided);
   t.is(third, CompressResult.compress_error);
 });
 
 test('successfully compresses video', async (t) => {
-  const result = await VideoCompressor.compress(['*.mov']);
+  const result = await VideoCompressor.compress(['test/*.mov']);
   t.is(result, CompressResult.success);
 });
