@@ -1,0 +1,39 @@
+{
+  "name": "tinyvideo",
+  "version": "1.0.0",
+  "description": "A package that compresses video files using FFMPEG compressor.",
+  "unpkg": "dist/tinyvideo.js",
+  "bin": {
+    "tinyvideo": "dist/tinyvideo.js"
+  },
+  "scripts": {
+    "build": "yarn check-types && parcel build src/cli.ts --target node --out-file tinyvideo.js",
+    "build-binaries": "pkg .",
+    "dev": "parcel watch src/cli.ts",
+    "format": "prettier --write .",
+    "check-types": "tsc --noEmit",
+    "test": "ava"
+  },
+  "ava": {
+		"typescript": {
+			"rewritePaths": {
+				"src/": "dist/"
+			}
+		}
+	},
+  "author": "skoshx",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@ava/typescript": "^1.1.1",
+    "@types/node": "^13.13.0",
+    "ava": "^3.7.1",
+    "chalk": "^4.0.0",
+    "execa": "^4.0.0",
+    "ffmpeg": "^0.0.4",
+    "globby": "^11.0.0",
+    "parcel": "^1.12.4",
+    "parcel-plugin-shebang": "^1.2.8",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
+  }
+}
