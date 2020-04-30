@@ -1,6 +1,6 @@
 {
   "name": "tinyvideo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package that compresses video files using FFMPEG compressor.",
   "unpkg": "dist/tinyvideo.js",
   "bin": {
@@ -12,6 +12,16 @@
     "format": "prettier --write .",
     "check-types": "tsc --noEmit",
     "test": "tsc src/compressor.ts && ava ; rm src/compressor.js ; rm test/test\\ video_compressed.mov"
+  },
+  "pkg": {
+    "scripts": [
+      "dist/**/*.js"
+    ],
+    "assets": [
+      "ffmpeg_binaries/**/*",
+      "dist/**/*.js",
+      "node_modules/**/*"
+    ]
   },
   "author": "skoshx",
   "license": "UNLICENSED",

@@ -5,10 +5,12 @@
  * Copyright 2020 skoshx. All rights reserved.
  */
 
+import { pathToFileURL } from 'url';
+
 const globby = require('globby');
 const execa = require('execa');
 const chalk = require('chalk');
-const { resolve } = require('path');
+const { join } = require('path');
 
 interface CompressionOptions {
   compressionRate: number; // How much to compress. The higher the more it gets compressed.
@@ -60,7 +62,8 @@ export class VideoCompressor {
     if (this.files.length === 0) return CompressResult.invalid_glob;
     for (let i = 0; i < this.files.length; i++) {
       const filePath = this.fixSpaces(this.files[i]);
-      const binaryPath = this.fixSpaces(this.getBinaryFile(process.platform));
+      // const binaryPath = this.fixSpaces(this.getBinaryFile(process.platform));
+      const binaryPath = 'ffmpeg'; // Bundling FFMPEG binaries is probably useless
 
       const outputFileName = this.getOutputFilename(
         filePath,
@@ -85,8 +88,8 @@ export class VideoCompressor {
 
   public static getBinaryFile(platform: string): string {
     if (platform === 'win32')
-      return resolve(__dirname, '..', 'ffmpeg_binaries/ffmpeg.exe');
-    else return resolve(__dirname, '..', 'ffmpeg_binaries/ffmpeg');
+      return join(__dirname, '../ffmpeg_binaries/ffmpeg.exe');
+    else return join(__dirname, '../ffmpeg_binaries/ffmpeg');
   }
 
   /**
