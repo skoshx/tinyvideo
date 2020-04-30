@@ -26,7 +26,7 @@
     ]
   },
   "author": "skoshx",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "@types/node": "^13.13.0",
     "ava": "^3.7.1",
