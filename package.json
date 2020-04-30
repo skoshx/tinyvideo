@@ -7,12 +7,14 @@
     "tinyvideo": "dist/tinyvideo.js"
   },
   "scripts": {
-    "build": "yarn check-types && yarn format && parcel build src/cli.ts --target node --out-file tinyvideo.js",
+    "build": "yarn check-types && yarn format && yarn types && parcel build src/cli.ts --target node --out-file tinyvideo.js",
     "dev": "parcel watch src/cli.ts",
     "format": "prettier --write .",
     "check-types": "tsc --noEmit",
-    "test": "tsc src/compressor.ts && ava ; rm src/compressor.js ; rm test/test\\ video_compressed.mov"
+    "test": "tsc src/compressor.ts && ava ; rm src/compressor.js ; rm test/test\\ video_compressed.mov",
+    "types": "tsc --emitDeclarationOnly --declaration src/compressor.ts --outFile dist/tinyvideo.d.ts"
   },
+  "types": "./dist/tinyvideo.d.ts",
   "pkg": {
     "scripts": [
       "dist/**/*.js"

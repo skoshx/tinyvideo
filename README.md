@@ -5,7 +5,8 @@
 ## Features
 
 - Really simple compressing using glob patterns.
--
+- Simple programmatic usage with a clean API.
+- Uses user intalled FFMPEG binaries.
 
 ## Install
 
